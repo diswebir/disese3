@@ -7,11 +7,20 @@ function es_options_schema() {
             array( 'title' => 'هویت بصری', 'fields' => array(
                 'site_tagline' => array( 'label' => 'عنوان کوتاه برند', 'type' => 'text', 'default' => 'شرکت دانش‌بنیان عرفان صنعت اصفهان' ),
                 'logo' => array( 'label' => 'لوگو', 'type' => 'image', 'default' => '' ),
-                'primary_color' => array( 'label' => 'رنگ اصلی', 'type' => 'color', 'default' => '#d9ae68' ),
-                'accent_color' => array( 'label' => 'رنگ مکمل', 'type' => 'color', 'default' => '#8c73d6' ),
-                'background_color' => array( 'label' => 'رنگ زمینه', 'type' => 'color', 'default' => '#090e1d' ),
+                'primary_color' => array( 'label' => 'رنگ اصلی تم تیره', 'type' => 'color', 'default' => '#d9ae68' ),
+                'accent_color' => array( 'label' => 'رنگ مکمل تم تیره', 'type' => 'color', 'default' => '#8c73d6' ),
+                'background_color' => array( 'label' => 'رنگ زمینه تم تیره', 'type' => 'color', 'default' => '#090e1d' ),
                 'body_font' => array( 'label' => 'فونت متن', 'type' => 'select', 'choices' => array( 'Vazirmatn' => 'وزیرمتن', 'Lalezar' => 'لاله‌زار' ), 'default' => 'Vazirmatn' ),
                 'heading_font' => array( 'label' => 'فونت تیتر', 'type' => 'select', 'choices' => array( 'Vazirmatn' => 'وزیرمتن', 'Lalezar' => 'لاله‌زار' ), 'default' => 'Vazirmatn' ),
+            ) ),
+        ) ),
+        'palette' => array( 'label' => 'تم رنگی', 'sections' => array(
+            array( 'title' => 'انتخاب ظاهر سایت', 'fields' => array(
+                'color_mode' => array( 'label' => 'حالت نمایش', 'type' => 'select', 'choices' => array( 'dark' => 'تم تیره (دارک)', 'light' => 'تم روشن (لایت)' ), 'default' => 'dark', 'description' => 'پیش‌نمایش بالا نمایی از رنگ‌های پیش‌فرض است. پس از ذخیره، ظاهر همه صفحات، فرم‌ها، فروشگاه و منوها تغییر می‌کند.' ),
+                'light_primary_color' => array( 'label' => 'رنگ اصلی تم روشن', 'type' => 'color', 'default' => '#70420d', 'description' => 'برای خوانایی متن و دکمه‌ها، رنگ‌های کم‌کنتراست به رنگ امن پیش‌فرض برمی‌گردند.' ),
+                'light_accent_color' => array( 'label' => 'رنگ مکمل تم روشن', 'type' => 'color', 'default' => '#60448c', 'description' => 'رنگ مکمل در حاشیه‌های تزئینی استفاده می‌شود؛ اگر کنتراست کافی نداشته باشد، رنگ پیش‌فرض اعمال می‌شود.' ),
+                'light_background_color' => array( 'label' => 'زمینه تم روشن', 'type' => 'color', 'default' => '#f7f8fb', 'description' => 'زمینه‌های تیره یا کم‌کنتراست در حالت روشن به رنگ امن پیش‌فرض برمی‌گردند.' ),
+                'light_text_color' => array( 'label' => 'متن تم روشن', 'type' => 'color', 'default' => '#17253b', 'description' => 'متن اصلی باید روی پس‌زمینه روشن کاملاً خوانا بماند.' ),
             ) ),
         ) ),
         'home' => array( 'label' => 'صفحه نخست', 'sections' => array(

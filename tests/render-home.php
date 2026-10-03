@@ -8,7 +8,7 @@ function add_action( $name, $callback, $priority = 10, $count = 1 ) { $GLOBALS['
 function add_filter( $name, $callback, $priority = 10, $count = 1 ) { add_action( $name, $callback ); }
 function get_template_directory() { return ES_THEME; }
 function get_template_directory_uri() { return '/my-custom-theme'; }
-function get_option( $key, $fallback = false ) { return $fallback; }
+function get_option( $key, $fallback = false ) { return 'es_theme_options' === $key && getenv( 'ES_RENDER_LIGHT' ) ? array( 'color_mode' => 'light' ) : $fallback; }
 function get_page_by_path( $path ) { return 'contact' === $path ? (object) array( 'ID' => 42, 'post_status' => 'publish' ) : null; }
 function get_permalink( $id = null ) { return '/contact/'; }
 function admin_url( $path = '' ) { return '/wp-admin/' . $path; }
@@ -32,7 +32,7 @@ function get_bloginfo( $what ) { return 'عرفان صنعت'; }
 function wp_json_encode( $value, $flags = 0 ) { return json_encode( $value, $flags ); }
 function body_class() { echo getenv( 'ES_RENDER_CONTACT' ) ? 'class="page page-template-template-contact"' : 'class="home"'; }
 function wp_body_open() {}
-function wp_head() { echo '<title>' . ( getenv( 'ES_RENDER_CONTACT' ) ? 'تماس با ما | ' : '' ) . 'عرفان صنعت</title><link rel="stylesheet" href="/my-custom-theme/assets/css/theme.css">'; foreach ( $GLOBALS['es_hooks']['wp_head'] ?? array() as $hook ) { $hook(); } }
+function wp_head() { echo '<title>' . ( getenv( 'ES_RENDER_CONTACT' ) ? 'تماس با ما | ' : '' ) . 'عرفان صنعت</title><link rel="stylesheet" href="/my-custom-theme/assets/css/theme.css">'; if ( getenv( 'ES_RENDER_LIGHT' ) ) { echo '<link rel="stylesheet" href="/my-custom-theme/assets/css/light.css">'; } foreach ( $GLOBALS['es_hooks']['wp_head'] ?? array() as $hook ) { $hook(); } }
 function wp_footer() { echo '<script src="/my-custom-theme/assets/js/theme.js"></script>'; }
 function wp_nav_menu( $args ) { call_user_func( $args['fallback_cb'] ); }
 function wp_unique_id( $prefix = '' ) { static $count = 0; return $prefix . ++$count; }

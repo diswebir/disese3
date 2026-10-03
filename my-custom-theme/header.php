@@ -1,6 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit; ?>
 <!doctype html>
-<html <?php language_attributes(); ?> dir="rtl">
+<html <?php language_attributes(); ?> dir="rtl" data-theme="<?php echo esc_attr( 'light' === es_opt( 'color_mode' ) ? 'light' : 'dark' ); ?>">
 <head>
 <meta charset="<?php bloginfo( 'charset' ); ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1">

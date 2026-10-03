@@ -1,5 +1,11 @@
 (() => {
   'use strict';
+  document.addEventListener('change', event => {
+    if (event.target.id === 'es-color_mode') {
+      const preview = document.querySelector('[data-mode-preview]');
+      if (preview) preview.dataset.mode = event.target.value === 'light' ? 'light' : 'dark';
+    }
+  });
   document.addEventListener('click', event => {
     const add = event.target.closest('[data-add-row]');
     if (add) {

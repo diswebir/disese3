@@ -12,7 +12,11 @@ function es_render_option_field( $key, $field ) {
         case 'select':
             echo '<select id="es-' . esc_attr( $key ) . '" name="' . esc_attr( $name ) . '">';
             foreach ( $field['choices'] as $option => $label ) { echo '<option value="' . esc_attr( $option ) . '" ' . selected( $value, $option, false ) . '>' . esc_html( $label ) . '</option>'; }
-            echo '</select>'; break;
+            echo '</select>';
+            if ( 'color_mode' === $key ) {
+                echo '<div class="es-mode-preview" data-mode-preview data-mode="' . esc_attr( 'light' === $value ? 'light' : 'dark' ) . '"><div class="es-mode-preview__bar"><span>عرفان صنعت</span><span>منو • تماس</span></div><div class="es-mode-preview__body"><strong>شهری روشن‌تر، از امروز</strong><p>نمونه خوانایی متن و دکمه در تم انتخابی شما</p><span class="es-mode-preview__button">مشاهده پروژه‌ها ↗</span></div></div>';
+            }
+            break;
         case 'image':
             $url = wp_get_attachment_image_url( absint( $value ), 'medium' );
             echo '<div class="es-image-field"><input type="hidden" id="es-' . esc_attr( $key ) . '" name="' . esc_attr( $name ) . '" value="' . esc_attr( $value ) . '"><img src="' . esc_url( $url ?: '' ) . '" alt="" ' . ( $url ? '' : 'hidden' ) . '><div><button type="button" class="button" data-option-image="es-' . esc_attr( $key ) . '">انتخاب تصویر</button> <button type="button" class="button" data-clear-image="es-' . esc_attr( $key ) . '">حذف</button></div></div>'; break;
