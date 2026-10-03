@@ -1,0 +1,3 @@
+<?php get_header(); ?>
+<main id="main" class="inner-page"><div class="container"><div class="archive-heading"><span class="eyebrow">JOURNAL / دانشنامه فنی</span><h1>دانشنامه <em>نور و فناوری</em></h1><p>راهنماها، استانداردها و تازه‌های نورپردازی شهری</p></div><div class="articles-grid"><?php if ( have_posts() ) : while ( have_posts() ) : the_post(); get_template_part( 'template-parts/cards/article' ); endwhile; else : ?><p>هنوز مقاله‌ای منتشر نشده است.</p><?php endif; ?></div><?php the_posts_pagination( array( 'prev_text' => 'قبلی', 'next_text' => 'بعدی' ) ); ?></div></main>
+<?php get_footer(); ?>
