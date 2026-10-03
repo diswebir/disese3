@@ -1,0 +1,16 @@
+<?php
+get_header();
+$projects = is_post_type_archive( 'project' ) || is_tax( array( 'project_cat', 'project_location' ) );
+?>
+<main id="main" class="inner-page archive-page"><div class="container">
+    <div class="archive-heading"><span class="eyebrow"><?php echo esc_html( $projects ? 'OUR PROJECTS / نمونه‌کارها' : 'JOURNAL / دانشنامه' ); ?></span><h1><?php echo esc_html( get_the_archive_title() ); ?></h1><?php if ( get_the_archive_description() ) : ?><p><?php echo esc_html( wp_strip_all_tags( get_the_archive_description() ) ); ?></p><?php endif; ?></div>
+    <?php if ( $projects ) : ?><nav class="category-chips" aria-label="دسته‌های پروژه"><a href="<?php echo esc_url( es_projects_url() ); ?>" <?php if ( is_post_type_archive( 'project' ) ) { echo 'aria-current="page"'; } ?>>همه پروژه‌ها</a><?php $terms = get_terms( array( 'taxonomy' => 'project_cat', 'hide_empty' => true ) ); if ( ! is_wp_error( $terms ) ) { foreach ( $terms as $term ) { echo '<a href="' . esc_url( get_term_link( $term ) ) . '"' . ( is_tax( 'project_cat', $term->term_id ) ? ' aria-current="page"' : '' ) . '>' . esc_html( $term->name ) . '</a>'; } } ?></nav><?php endif; ?>
+    <div class="<?php echo esc_attr( $projects ? 'projects-grid' : 'articles-grid' ); ?>">
+        <?php if ( have_posts() ) : $position = 0; while ( have_posts() ) : the_post();
+            if ( $projects ) { get_template_part( 'template-parts/cards/project', null, array( 'number' => ++$position ) ); }
+            else { get_template_part( 'template-parts/cards/article' ); }
+        endwhile; else : ?><div class="empty-state"><h2>هنوز موردی ثبت نشده است.</h2><p>به‌زودی محتوای تازه در این بخش قرار می‌گیرد.</p><a class="btn btn--outline" href="<?php echo esc_url( home_url( '/' ) ); ?>">بازگشت به خانه</a></div><?php endif; ?>
+    </div>
+    <?php the_posts_pagination( array( 'prev_text' => 'قبلی', 'next_text' => 'بعدی' ) ); ?>
+</div></main>
+<?php get_footer(); ?>
