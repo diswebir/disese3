@@ -24,6 +24,7 @@ function es_render_option_field( $key, $field ) {
         default:
             echo '<input id="es-' . esc_attr( $key ) . '" type="' . esc_attr( $field['type'] ) . '" name="' . esc_attr( $name ) . '" value="' . esc_attr( $value ) . '"' . ( 'color' === $field['type'] ? '' : ' class="regular-text"' ) . '>';
     }
+    if ( ! empty( $field['description'] ) ) { echo '<p class="es-field__hint">' . esc_html( $field['description'] ) . '</p>'; }
     echo '</div></div>';
 }
 function es_render_repeater_row( $key, $field, $index, $row ) {

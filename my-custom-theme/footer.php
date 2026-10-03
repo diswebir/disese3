@@ -11,5 +11,6 @@
         <div class="footer-bottom"><span>© <?php echo esc_html( wp_date( 'Y' ) ); ?> <?php echo esc_html( es_opt( 'footer_text' ) ); ?></span><span>ساخته‌شده با عشق به نور و شهر</span><a href="#top" class="back-to-top" aria-label="بازگشت به بالا">↑</a></div>
     </div>
 </footer>
+<nav class="mobile-dock" aria-label="دسترسی سریع موبایل"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><span aria-hidden="true">⌂</span>خانه</a><a href="<?php echo esc_url( es_projects_url() ); ?>"><span aria-hidden="true">✧</span>پروژه‌ها</a><a href="<?php echo esc_url( es_shop_url() ); ?>"><span aria-hidden="true">◇</span>محصولات</a><a href="<?php echo esc_url( es_phone_url( es_opt( 'phone' ) ) ); ?>"><span aria-hidden="true">↗</span>تماس</a></nav>
 <?php wp_footer(); ?>
 </body></html>

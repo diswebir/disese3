@@ -6,6 +6,19 @@ const { parseHTML } = require('linkedom');
 const html = fs.readFileSync(process.env.RENDERED_HTML || '/tmp/es-home.html', 'utf8');
 const { document } = parseHTML(html);
 const window = { scrollY: 0, addEventListener: () => {} };
+const ids = [...document.querySelectorAll('[id]')].map(node => node.id);
+assert.equal(ids.length, new Set(ids).size, 'Page IDs must be unique');
+assert.equal(document.querySelectorAll('.products-grid .product-card').length, 5, 'Five distinct fallback products must match the reference layout');
+assert.equal(document.querySelectorAll('.projects-grid .project-card').length, 3);
+assert.ok(document.querySelector('.hero h1 em')?.textContent.includes('آینده‌ای روشن'));
+assert.equal(document.querySelectorAll('.cities__list').length, 2, 'City marquee has an accessible original and hidden visual clone');
+assert.ok(document.querySelector('.mobile-dock'));
+for (const asset of document.querySelectorAll('img[src],script[src],link[rel="stylesheet"]')) {
+  const url = asset.getAttribute('src') || asset.getAttribute('href');
+  assert.ok(!/^https?:\/\//.test(url), `External runtime asset: ${url}`);
+  if (url.startsWith('/my-custom-theme/')) assert.ok(fs.existsSync(`.${url}`), `Missing local asset: ${url}`);
+}
+console.log('PASS: visual section markup, local assets, IDs, mobile dock');
 const context = vm.createContext({ document, window, console });
 vm.runInContext(fs.readFileSync('my-custom-theme/assets/js/theme.js', 'utf8'), context);
 const toggle = document.querySelector('.menu-toggle');

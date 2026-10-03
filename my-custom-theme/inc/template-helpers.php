@@ -17,9 +17,10 @@ function es_image( $option, $fallback ) {
     $id = absint( es_opt( $option ) );
     return $id && wp_get_attachment_image_url( $id, 'full' ) ? wp_get_attachment_image_url( $id, 'full' ) : es_asset( 'images/' . $fallback );
 }
+function es_persian_digits( $value ) { return strtr( (string) $value, '0123456789', '۰۱۲۳۴۵۶۷۸۹' ); }
 function es_phone_url( $phone ) { return 'tel:' . preg_replace( '/[^0-9+]/', '', $phone ); }
 function es_projects_url() { return get_post_type_archive_link( 'project' ) ?: home_url( '/projects/' ); }
-function es_shop_url() { return function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : home_url( '/shop/' ); }
+function es_shop_url() { return function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : home_url( '/#products' ); }
 function es_blog_url() { $id = (int) get_option( 'page_for_posts' ); return $id ? get_permalink( $id ) : home_url( '/blog/' ); }
 function es_excerpt( $length = 24 ) { return wp_trim_words( get_the_excerpt(), $length, '…' ); }
 function es_breadcrumbs() {

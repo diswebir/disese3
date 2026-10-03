@@ -18,6 +18,7 @@ function es_options_schema() {
             array( 'title' => 'بنر اصلی', 'fields' => array(
                 'hero_eyebrow' => array( 'label' => 'برچسب بالای تیتر', 'type' => 'text', 'default' => 'شرکت دانش‌بنیان عرفان صنعت اصفهان' ),
                 'hero_title' => array( 'label' => 'تیتر بنر', 'type' => 'text', 'default' => 'درخشان‌تر از همیشه، آینده‌ای روشن برای ایران می‌سازیم' ),
+                'hero_highlight' => array( 'label' => 'عبارت برجسته در تیتر', 'type' => 'text', 'default' => 'آینده‌ای روشن برای ایران می‌سازیم', 'description' => 'این عبارت باید دقیقاً بخشی از تیتر بنر باشد.' ),
                 'hero_text' => array( 'label' => 'توضیح بنر', 'type' => 'textarea', 'default' => 'با بیش از دو دهه تجربه، پیشگام در طراحی، تولید و اجرای پروژه‌های روشنایی شهری و صنعتی؛ روشنایی‌بخش خیابان‌ها، پارک‌ها و میادین کشور هستیم.' ),
                 'hero_image' => array( 'label' => 'تصویر بنر', 'type' => 'image', 'default' => '' ),
                 'hero_primary_label' => array( 'label' => 'متن دکمه اول', 'type' => 'text', 'default' => 'مشاهده پروژه‌های نورپردازی' ),

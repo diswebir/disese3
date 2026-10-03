@@ -19,6 +19,22 @@
     });
     document.addEventListener('keydown', event => { if (event.key === 'Escape') { nav.classList.remove('is-open'); menu.setAttribute('aria-expanded', 'false'); } });
   }
+  const search = document.querySelector('.header-search');
+  if (search) {
+    document.addEventListener('click', event => { if (search.open && !search.contains(event.target)) search.open = false; });
+    document.addEventListener('keydown', event => { if (event.key === 'Escape' && search.open) { search.open = false; search.querySelector('summary')?.focus(); } });
+  }
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const items = document.querySelectorAll('.section-head, .projects-grid .project-card, .products-grid .product-card, .about-visual, .about-copy, .why-grid > div, .contact-copy');
+    items.forEach(item => { item.dataset.reveal = ''; });
+    document.documentElement.classList.add('has-motion');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -35px 0px' });
+    items.forEach(item => observer.observe(item));
+  }
   const serviceImage = document.getElementById('service-image');
   document.querySelectorAll('[data-service]').forEach(button => {
     button.addEventListener('click', () => {

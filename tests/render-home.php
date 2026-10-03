@@ -27,6 +27,9 @@ function wp_body_open() {}
 function wp_head() { echo '<link rel="stylesheet" href="/my-custom-theme/assets/css/theme.css">'; foreach ( $GLOBALS['es_hooks']['wp_head'] ?? array() as $hook ) { $hook(); } }
 function wp_footer() { echo '<script src="/my-custom-theme/assets/js/theme.js"></script>'; }
 function wp_nav_menu( $args ) { call_user_func( $args['fallback_cb'] ); }
+function wp_unique_id( $prefix = '' ) { static $count = 0; return $prefix . ++$count; }
+function get_search_query() { return ''; }
+function get_search_form() { require ES_THEME . '/searchform.php'; }
 function get_header() { require ES_THEME . '/header.php'; }
 function get_footer() { require ES_THEME . '/footer.php'; }
 function get_template_part( $slug ) { require ES_THEME . '/' . $slug . '.php'; }

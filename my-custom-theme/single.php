@@ -58,6 +58,12 @@
             } ?>
         </div>
     </article>
+    <?php
+    $related = new WP_Query( array( 'post_type' => $project ? 'project' : 'post', 'post__not_in' => array( get_the_ID() ), 'posts_per_page' => 3, 'no_found_rows' => true ) );
+    if ( $related->have_posts() ) : ?>
+    <section class="container related-section"><div class="section-head"><div><span class="eyebrow"><?php echo esc_html( $project ? 'PROJECTS / پروژه‌های بیشتر' : 'JOURNAL / مطالب بیشتر' ); ?></span><h2><?php echo esc_html( $project ? 'پروژه‌های دیگر ما' : 'مطالب پیشنهادی برای شما' ); ?></h2></div><a class="text-link" href="<?php echo esc_url( $project ? es_projects_url() : es_blog_url() ); ?>">مشاهده همه ←</a></div><div class="<?php echo esc_attr( $project ? 'projects-grid' : 'articles-grid' ); ?>"><?php while ( $related->have_posts() ) : $related->the_post(); get_template_part( 'template-parts/cards/' . ( $project ? 'project' : 'article' ) ); endwhile; ?></div></section>
+    <?php wp_reset_postdata(); endif; ?>
+    <div class="container single-cta"><div><span class="eyebrow">LET'S TALK LIGHT</span><h2>برای پروژه بعدی آماده‌اید؟</h2><p>برای بررسی ایده و دریافت مشاوره تخصصی با ما در ارتباط باشید.</p></div><a class="btn btn--gold" href="<?php echo esc_url( es_phone_url( es_opt( 'phone' ) ) ); ?>">تماس با کارشناسان ↗</a></div>
 </main>
 <?php
     if ( ! $project && is_array( $faqs ) && $faqs ) {
