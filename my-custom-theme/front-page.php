@@ -16,7 +16,7 @@
                     echo esc_html( substr( $hero_title, 0, $highlight_at ) ) . '<em>' . esc_html( $hero_highlight ) . '</em>' . esc_html( substr( $hero_title, $highlight_at + strlen( $hero_highlight ) ) );
                 else : echo esc_html( $hero_title ); endif; ?></h1>
                 <p class="hero__description"><?php echo esc_html( es_opt( 'hero_text' ) ); ?></p>
-                <div class="hero__buttons"><a class="btn btn--gold" href="<?php echo esc_url( es_projects_url() ); ?>"><?php echo esc_html( es_opt( 'hero_primary_label' ) ); ?> <span aria-hidden="true">↗</span></a><a class="btn btn--outline" href="#contact"><?php echo esc_html( es_opt( 'hero_secondary_label' ) ); ?> <span aria-hidden="true">←</span></a></div>
+                <div class="hero__buttons"><a class="btn btn--gold" href="<?php echo esc_url( es_projects_url() ); ?>"><?php echo esc_html( es_opt( 'hero_primary_label' ) ); ?> <span aria-hidden="true">↗</span></a><a class="btn btn--outline" href="<?php echo esc_url( es_contact_form_url() ); ?>"><?php echo esc_html( es_opt( 'hero_secondary_label' ) ); ?> <span aria-hidden="true">←</span></a></div>
             </div>
         </div>
         <div class="container hero__bottom">

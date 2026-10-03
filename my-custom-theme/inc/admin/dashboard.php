@@ -10,7 +10,7 @@ function es_render_dashboard() {
     if ( ! isset( $schema[ $tab ] ) && 'tools' !== $tab ) { $tab = 'identity'; }
     echo '<div class="wrap es-admin" dir="rtl"><div class="es-admin__head"><span class="es-admin__eyebrow">ERFAN SANAT • THEME STUDIO</span><h1>تنظیمات روشنای شهر</h1><p>مدیریت یکپارچه هویت، محتوای صفحه نخست و راه‌های ارتباطی</p></div>';
     if ( isset( $_GET['es_notice'] ) ) {
-        $notices = array( 'saved' => 'تنظیمات ذخیره شد.', 'imported' => 'تنظیمات درون‌ریزی شد.', 'demo' => 'دسته‌بندی‌ها و محتوای نمونه آماده شدند.', 'error' => 'فایل درون‌ریزی معتبر نیست.' );
+        $notices = array( 'saved' => 'تنظیمات ذخیره شد.', 'imported' => 'تنظیمات درون‌ریزی شد.', 'demo' => 'دسته‌بندی‌ها، محتوای نمونه و برگه تماس آماده شدند.', 'contact' => 'برگه تماس با ما آماده شد. اطلاعات و فرم را از تب «ارتباط و فوتر» ویرایش کنید.', 'error' => 'فایل درون‌ریزی معتبر نیست.' );
         $notice = sanitize_key( wp_unslash( $_GET['es_notice'] ) );
         if ( isset( $notices[ $notice ] ) ) { echo '<div class="notice notice-' . ( 'error' === $notice ? 'error' : 'success' ) . ' inline"><p>' . esc_html( $notices[ $notice ] ) . '</p></div>'; }
     }

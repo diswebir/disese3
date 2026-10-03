@@ -19,5 +19,5 @@
         <?php endforeach;
     endif; ?>
     </div>
-    <div class="custom-banner"><div><span class="eyebrow">MADE FOR YOUR VISION</span><h3>طراحی و ساخت سفارشی، مطابق طرح اختصاصی شما</h3><p>اگر طرح خاصی در ذهن دارید، تیم مهندسی ما از ایده تا اجرای نهایی در کنار شماست.</p></div><a class="btn btn--gold" href="#contact">شروع سفارش اختصاصی ↗</a></div>
+    <div class="custom-banner"><div><span class="eyebrow">MADE FOR YOUR VISION</span><h3>طراحی و ساخت سفارشی، مطابق طرح اختصاصی شما</h3><p>اگر طرح خاصی در ذهن دارید، تیم مهندسی ما از ایده تا اجرای نهایی در کنار شماست.</p></div><a class="btn btn--gold" href="<?php echo esc_url( es_contact_form_url() ); ?>">شروع سفارش اختصاصی ↗</a></div>
 </div></section>

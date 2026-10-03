@@ -9,6 +9,13 @@ function add_filter( $name, $callback, $priority = 10, $count = 1 ) { add_action
 function get_template_directory() { return ES_THEME; }
 function get_template_directory_uri() { return '/my-custom-theme'; }
 function get_option( $key, $fallback = false ) { return $fallback; }
+function get_page_by_path( $path ) { return 'contact' === $path ? (object) array( 'ID' => 42, 'post_status' => 'publish' ) : null; }
+function get_permalink( $id = null ) { return '/contact/'; }
+function admin_url( $path = '' ) { return '/wp-admin/' . $path; }
+function wp_nonce_field( $action, $name = '_wpnonce' ) { echo '<input type="hidden" name="' . esc_attr( $name ) . '" value="preview-nonce">'; }
+function wp_unslash( $value ) { return $value; }
+function sanitize_key( $value ) { return preg_replace( '/[^a-z0-9_-]/', '', strtolower( $value ) ); }
+function have_posts() { return false; }
 function wp_get_attachment_image_url( $id, $size ) { return false; }
 function absint( $x ) { return abs( (int) $x ); }
 function sanitize_hex_color( $x ) { return $x; }
@@ -22,9 +29,10 @@ function sanitize_email( $value ) { return $value; }
 function language_attributes() { echo 'lang="fa-IR"'; }
 function bloginfo( $what ) { echo 'UTF-8'; }
 function get_bloginfo( $what ) { return 'عرفان صنعت'; }
-function body_class() { echo 'class="home"'; }
+function wp_json_encode( $value, $flags = 0 ) { return json_encode( $value, $flags ); }
+function body_class() { echo getenv( 'ES_RENDER_CONTACT' ) ? 'class="page page-template-template-contact"' : 'class="home"'; }
 function wp_body_open() {}
-function wp_head() { echo '<link rel="stylesheet" href="/my-custom-theme/assets/css/theme.css">'; foreach ( $GLOBALS['es_hooks']['wp_head'] ?? array() as $hook ) { $hook(); } }
+function wp_head() { echo '<title>' . ( getenv( 'ES_RENDER_CONTACT' ) ? 'تماس با ما | ' : '' ) . 'عرفان صنعت</title><link rel="stylesheet" href="/my-custom-theme/assets/css/theme.css">'; foreach ( $GLOBALS['es_hooks']['wp_head'] ?? array() as $hook ) { $hook(); } }
 function wp_footer() { echo '<script src="/my-custom-theme/assets/js/theme.js"></script>'; }
 function wp_nav_menu( $args ) { call_user_func( $args['fallback_cb'] ); }
 function wp_unique_id( $prefix = '' ) { static $count = 0; return $prefix . ++$count; }
@@ -36,4 +44,4 @@ function get_template_part( $slug ) { require ES_THEME . '/' . $slug . '.php'; }
 function wp_date( $format ) { return date( $format ); }
 class WP_Query { function __construct( $args ) {} function have_posts() { return false; } }
 require ES_THEME . '/functions.php';
-require ES_THEME . '/front-page.php';
+require ES_THEME . ( getenv( 'ES_RENDER_CONTACT' ) ? '/page-contact.php' : '/front-page.php' );

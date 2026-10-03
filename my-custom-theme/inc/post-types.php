@@ -17,6 +17,20 @@ add_action( 'init', function () {
         'public' => true, 'hierarchical' => false, 'show_in_rest' => true,
         'rewrite' => array( 'slug' => 'project-location', 'with_front' => false ),
     ) );
+    /* Private contact requests: visible only to site administrators, never on the public REST API. */
+    register_post_type( 'es_inquiry', array(
+        'labels' => array( 'name' => 'درخواست‌های مشاوره', 'singular_name' => 'درخواست مشاوره', 'edit_item' => 'مشاهده درخواست' ),
+        'public' => false, 'show_ui' => true, 'show_in_rest' => false, 'exclude_from_search' => true,
+        'menu_icon' => 'dashicons-email-alt', 'menu_position' => 59,
+        'supports' => array( 'title', 'editor' ),
+        'map_meta_cap' => false,
+        'capabilities' => array(
+            'edit_post' => 'manage_options', 'read_post' => 'manage_options', 'delete_post' => 'manage_options',
+            'edit_posts' => 'manage_options', 'edit_others_posts' => 'manage_options', 'publish_posts' => 'manage_options',
+            'read_private_posts' => 'manage_options', 'delete_posts' => 'manage_options', 'delete_others_posts' => 'manage_options',
+            'create_posts' => 'do_not_allow',
+        ),
+    ) );
 } );
 add_action( 'after_switch_theme', function () {
     /* Project rewrite rules must work even when the demo importer is never run. */

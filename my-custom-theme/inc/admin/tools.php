@@ -2,6 +2,7 @@
 defined( 'ABSPATH' ) || exit;
 function es_render_tools() {
     echo '<section class="es-panel"><h2>درون‌ریزی ساختار و محتوای نمونه</h2><p>دسته‌بندی‌های محصولات، ویژگی‌ها، پروژه‌ها و مقالات همراه با چند نوشته نمونه و تصاویر محلی ایجاد می‌شوند. اجرای دوباره، محتوای موجود را تکرار نمی‌کند. برای محصول و ویژگی‌ها ووکامرس باید فعال باشد.</p><form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '"><input type="hidden" name="action" value="es_seed_demo">'; wp_nonce_field( 'es_seed_demo' ); echo '<button class="button button-primary" type="submit">ایجاد ساختار و دمو</button></form></section>';
+    echo '<section class="es-panel"><h2>برگه اختصاصی تماس با ما</h2><p>برگه /contact/ را می‌سازد و تمپلیت تماس را به آن اختصاص می‌دهد. اگر برگه از قبل وجود داشته باشد فقط تمپلیت به آن متصل می‌شود؛ محتوای موجود پاک نخواهد شد.</p><form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '"><input type="hidden" name="action" value="es_create_contact_page">'; wp_nonce_field( 'es_create_contact_page' ); echo '<button class="button button-primary" type="submit">ایجاد یا اتصال برگه تماس</button></form></section>';
     echo '<section class="es-panel"><h2>خروجی تنظیمات</h2><p>فایل JSON تنها تنظیمات همین پوسته را شامل می‌شود، نه محتوای سایت یا فایل‌های رسانه.</p><form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '"><input type="hidden" name="action" value="es_export">'; wp_nonce_field( 'es_export' ); echo '<button class="button" type="submit">دریافت JSON</button></form></section>';
     echo '<section class="es-panel"><h2>درون‌ریزی تنظیمات</h2><form method="post" enctype="multipart/form-data" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '"><input type="hidden" name="action" value="es_import">'; wp_nonce_field( 'es_import' ); echo '<input type="file" name="es_file" accept=".json,application/json" required> <button class="button" type="submit">درون‌ریزی JSON</button></form></section>';
 }
@@ -21,6 +22,20 @@ add_action( 'admin_post_es_import', function () {
     $data = json_decode( file_get_contents( $_FILES['es_file']['tmp_name'] ), true );
     if ( ! is_array( $data ) || ( $data['theme'] ?? '' ) !== 'erfan-sanat' || ! isset( $data['options'] ) || ! is_array( $data['options'] ) ) { es_tools_redirect( 'error' ); }
     update_option( 'es_theme_options', es_sanitize_options( $data['options'] ) ); es_tools_redirect( 'imported' );
+} );
+function es_ensure_contact_page() {
+    $page = get_page_by_path( 'contact' );
+    if ( $page ) { $id = $page->ID; }
+    else {
+        $id = wp_insert_post( array( 'post_type' => 'page', 'post_status' => 'publish', 'post_name' => 'contact', 'post_title' => 'تماس با ما', 'post_content' => '' ), true );
+    }
+    if ( ! is_wp_error( $id ) && $id ) { update_post_meta( $id, '_wp_page_template', 'templates/template-contact.php' ); }
+    return $id;
+}
+add_action( 'admin_post_es_create_contact_page', function () {
+    es_tools_auth( 'es_create_contact_page' );
+    $id = es_ensure_contact_page();
+    es_tools_redirect( is_wp_error( $id ) || ! $id ? 'error' : 'contact' );
 } );
 /** Stable slug-based seeding; existing content, permalinks and the site's front page are never overwritten. */
 function es_seed_terms( $taxonomy, $terms, $parent = 0 ) {
@@ -89,5 +104,6 @@ add_action( 'admin_post_es_seed_demo', function () {
         es_seed_post( 'product', 'urban-light-sphere', 'گوی نورانی شهری', 'المان حجمی سفارشی برای میادین و فضاهای باز.', 'light-sphere.jpg', array( 'product_cat' => array( 'square-elements' ) ) );
         es_seed_post( 'product', 'led-light-tunnel', 'تونل نوری LED', 'سازه نوری سفارشی برای مسیرهای عبوری و جشنواره‌ها.', 'light-tunnel.jpg', array( 'product_cat' => array( 'light-tunnels' ) ) );
     }
+    es_ensure_contact_page();
     flush_rewrite_rules(); es_tools_redirect( 'demo' );
 } );
