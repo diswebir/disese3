@@ -100,7 +100,7 @@ add_action( 'admin_post_es_seed_demo', function () {
     es_seed_post( 'project', 'urban-light-trees', 'درختان نوری هوشمند', 'درختان نورانی هوشمند برای فضای سبز و بوستان‌ها.', 'light-tree.jpg', array( 'project_cat' => array( 'parks-landscapes' ), 'project_location' => array( 'shiraz' ) ) );
     es_seed_post( 'post', 'urban-lighting-guide', 'راهنمای انتخاب نورپردازی شهری', 'معیارهای مهم طراحی، انتخاب تجهیزات و اجرای نورپردازی پایدار شهری.', 'hero.jpg', array( 'category' => array( 'lighting-standards' ) ) );
     if ( post_type_exists( 'product' ) ) {
-        es_seed_post( 'product', 'smart-light-tree', 'درخت نوری هوشمند', 'درخت نوری RGB با کنترل هوشمند و طراحی اختصاصی.', 'light-tree.jpg', array( 'product_cat' => array( 'light-trees' ) ) );
+        es_seed_post( 'product', 'smart-light-tree', 'درخت نوری هوشمند آرتام', 'درخت نوری پیکسلی RGB با کنترل هوشمند و طراحی متناسب با فضاهای شهری.', 'light-tree.jpg', array( 'product_cat' => array( 'light-trees' ) ) );
         es_seed_post( 'product', 'urban-light-sphere', 'گوی نورانی شهری', 'المان حجمی سفارشی برای میادین و فضاهای باز.', 'light-sphere.jpg', array( 'product_cat' => array( 'square-elements' ) ) );
         es_seed_post( 'product', 'led-light-tunnel', 'تونل نوری LED', 'سازه نوری سفارشی برای مسیرهای عبوری و جشنواره‌ها.', 'light-tunnel.jpg', array( 'product_cat' => array( 'light-tunnels' ) ) );
     }
